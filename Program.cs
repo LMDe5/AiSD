@@ -11,41 +11,83 @@ namespace AISD
         static void Main(string[] args)
         {
             //task 1
-            List<List<int>> ultraList = new List<List<int>>
+            int[][] ultraArray =
             {
-                new List<int> {1, 2, 3},
-                new List<int> {3, 4, 5, 8},
-                new List<int> {6, 8, 12},
-                new List<int> {5, 23, 146},
+                new int[] {1, 2, 3},
+                new int[] {3, 4, 5, 8},
+                new int[] {6, 8, 12},
+                new int[] {5, 23, 146},
             };
-            List<int> megaList = MegaList(ultraList);
-            Console.WriteLine(ShowList(megaList));
-
+            int[] megaArray = MegaArray(ultraArray);
+            Console.WriteLine(ShowArray(megaArray));
 
             //task 2 i guess
-            List<int> numbers = new List<int> { 21, 111, 9, 69, 14, 88, 05, 67, 27, 14, 16, 09};
+            List<int> numbers = new List<int> { 21, 111, 9, 50, 69, 14, 88};
             string largest = GetLargestNumber(numbers);
             Console.WriteLine(largest);
+
+            //task LeetCode_42 :D
+            Leetcode_42 leetcode_42 = new Leetcode_42();
+            int[] columnes = new int[] {12, 10, 28, 69, 14, 88};
+            Console.WriteLine(leetcode_42.Trap(columnes));
+
+            //task Leetcode_152 :D
+            Leetcode_152 leetcode_152 = new Leetcode_152();
+            int[] ints = new int[] { -28, 5, 4, -2, 14, 16, 12, -4};
+            Console.WriteLine(leetcode_152.MaxInternalArray(ints));
+
         }
-        public static List<int> MegaList(List<List<int>> list)
+        public static int[] MegaArray(int[][] list)
         {
-            List<int> megaList = new List<int>();
-            foreach (List<int> internalList in list)
+            int totalLength = 0;
+            foreach (int[] innerArray in list)
             {
-                foreach (int i in internalList)
+                totalLength += innerArray.Length;
+            }
+
+            int[] megaArray = new int[totalLength];
+            int position = 0;
+
+            foreach (int[] innerArray in list)
+            {
+                foreach (int item in innerArray)
                 {
-                    megaList.Add(i);
+                    megaArray[position++] = item;
                 }
             }
-            megaList.Sort();
-            return megaList;
+
+            BubbleSort(megaArray);
+
+            return megaArray;
         }
-        public static string ShowList(List<int> list)
+
+        public static void BubbleSort(int[] array)
+        {
+            bool flag;
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                flag = false;
+                for (int j = 0; j < array.Length - 1 - i; j++)
+                {
+                    if (array[j] > array[j + 1])
+                    {
+                        int temp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
+                        flag = true;
+                    }
+                }
+                if (!flag)
+                    break;
+            }
+        }
+
+        public static string ShowArray(int[] array)
         {
             string regularString = "";
-            foreach(int i in list)
+            for (int i = 0; i < array.Length; i++)
             {
-                regularString = regularString + $"{i}, ";
+                regularString = regularString + array[i] + ", "; 
             }
             return regularString;
         }
