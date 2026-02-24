@@ -16,12 +16,11 @@ namespace AISD
         {
             if (ints.Length == 0)
             {
-                return -1;
+                return 0;
             }
             int maxResult = 0;
             int minResult = 0;
             int result = ints[0];
-            int resultResult = 0;
 
             if (result < 0)
             {

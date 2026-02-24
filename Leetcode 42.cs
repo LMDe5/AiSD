@@ -15,6 +15,11 @@ namespace AISD
 
         public int Trap(int[] height)
         {
+            if (height.Length == 0)
+            {
+                return 0;
+            }
+
             int left = 0;
             int right = height.Length - 1;
             int maxLeft = 0;
